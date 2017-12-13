@@ -1,0 +1,38 @@
+<html>
+<head>
+<link rel='stylesheet' type="text/css" href="style.css">
+<script type="text/javascript" src='script.js'></script>
+</head>
+<body>
+<div id='pageHeading'>
+<h1>Bear Gym</h1>
+<p>Using a ratio of squat weight determine what weight to lift for a balanced workout</p>
+</div>
+
+<div id='set'>
+<p>Set Weight</p>
+<form id='setWeight' onsubmit="setWeight(form);"/>
+<input type='textbox' name='weight' value=""/>
+<input type='button' value='Submit' onclick="setWeight(form);"/>
+</form>
+</div>
+
+<div id='weights'>
+
+<h4>1</h4>
+<p id='squat'>Squat</p>
+<p id='bench'>Bench</p>
+
+<h4>0.5</h4>
+<p id='ohp'>OHP</p>
+
+<h4>1.25</h4>
+<p id='dl'>DL</p>
+
+<h4>0.25</h4>
+<p id='curl'>Bicep Curl</p>
+
+</div>
+
+</body>
+</html>
