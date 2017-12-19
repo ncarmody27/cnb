@@ -3,19 +3,20 @@ function setWeight(form){
 	let weightTwo = weight - 2.5;
 	let weightThree = weight - 5;
 	//squat
-	let squat = makeTable('Squat',1, weight, weightTwo, weightThree);
+	let squat = makeTable('Squat (A & B)',1, weight, weightTwo, weightThree);
 	document.getElementById('squat').innerHTML = squat;
-	let bench = makeTable('Bench',1, weight, weightTwo, weightThree);
+	//bench
+	let bench = makeTable('Bench (A)',1, weight, weightTwo, weightThree);
 	document.getElementById('bench').innerHTML = bench;
 	//ohp
-	var ohp = makeTable('OHP', .5, weight, weightTwo, weightThree);
+	var ohp = makeTable('OHP (B)', .5, weight, weightTwo, weightThree);
 	document.getElementById('ohp').innerHTML =ohp;
 	//deadlift
-	var dl = makeTable('Deadlift', 1.25, weight, weightTwo, weightThree);
+	var dl = makeTable('Deadlift (B)', 1.25, weight, weightTwo, weightThree);
 	document.getElementById('dl').innerHTML =dl;
-	//curl
-	var crl = makeTable('Bicep Curl', .25, weight, weightTwo, weightThree);
-	document.getElementById('curl').innerHTML =crl;
+	//Barbell Row
+	var bbr = makeTable('Barbell Row (A)', .75, weight, weightTwo, weightThree);
+	document.getElementById('bbr').innerHTML =bbr;
 }
 
 function makeTable(exercise, modifier, weight, weightTwo, weightThree){
