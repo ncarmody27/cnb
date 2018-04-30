@@ -1,19 +1,21 @@
 function viewRecipe(recipe, divId){
   //takes a recipe(html to be inserted) and the name of the div and inserts it into the DOM
-	const header = document.getElementById(divId).innerHTML
-	recipe =header+prototypeRecipe	//will be given recipe from DB/server
-	console.log(recipe)
-	document.getElementById(divId).innerHTML=recipe
-	//return recipe
+	const element = document.getElementById(divId+'Recipe')
+	if (element.style.display === 'none'){
+		element.style.display = 'block'
+		return
 	}
-
-//use toggle onclick to toggle view of recipe
-function closeRecipe(divId){
-  let element = document.getElementById(divId).innerHTML
-  //regex to remove all past the closing </a> tag
-  //return original state
-  document.getElementById(divId).innerHTML=element;
-
+	if (element.style.display === 'block'){
+		element.style.display = 'none'
+		return
+	} else{
+		recipe = prototypeRecipe	//will be given recipe from DB/server
+		console.log(recipe)
+		element.innerHTML=recipe
+		element.style.display = 'block'
+	}
+	
 }
+
 
 let prototypeRecipe = '<p>test</p>'
