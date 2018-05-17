@@ -1,0 +1,32 @@
+<!doctype HTML>
+<html>
+  <head><title>Recipes</title></head>
+  <body>
+	<h4>My Recipes Book</h4>
+	
+  {% for recipe in recipes %}
+	<div id='0'>
+	<h5 onclick= viewRecipe('',{{recipe.index}})>{{recipe.title}}</h5>
+	<div id='{{recipe.index}}Recipe' style='display:none;'>
+	<img src={{recipe.picture.link}} alt={{recipe.picture.alt}} width='700px' height='500px'>
+	<table>
+	<tr><th>Ingredients</th><th>Method</th></tr>
+	<tr>
+	<td><ul>{% for ingredient in recipe.ingredients %}<li>{{ingredient}}</li>{% endfor %}</ul></td>
+	<td><ol start='0'>{% for step in recipe.method %}<li>{{step}}</li>{% endfor %}</ol></td>
+	</tr>
+	</table>
+	</div>
+	{% endfor %}
+	<!--
+	<h5>Recipe Template:</h5>
+	<div id='0'>
+	<h5 onclick= viewRecipe('','0')> Bearmingtons</h5>
+	<div id='0Recipe'>
+	</div>
+  </div>!-->
+	
+	</body>
+	<script src='/recipes.js'>
+	</script>
+</html>

@@ -1,0 +1,22 @@
+<!doctype HTML>
+<html>
+  <head><title></title></head>
+  <body>
+<form id='create' method='post' action='http://localhost:3000/api/recipe'>
+Title: <input type="text" name="title" >
+Picture Link: <input type="text" name="link">
+Picture alt: <input type="text" name="alt" >
+Ingredients: <input type="text" name="ingredients">
+Method: <input type="text" name="method">
+<input type="submit" value="Submit" >
+</form>
+  </body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src='/recipes.js'>
+</html>
+<!--	Example insert
+insert into recipes(title, link, alt, ingredients, method)
+values('Test','http://scruss.com/wordpress/wp-content/uploads/2013/06/random20130606210630.png',
+	  'Static test','{"test","test"}','{"test","test"}');
+!-->
