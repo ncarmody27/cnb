@@ -50,6 +50,18 @@ router.post('/recipe', function(req, res){
 	CRUD.createRecipe(req, res)
 })
 
+router.get('/recipes', function(req, res){
+  CRUD.getAllRecipes(res)
+})
+
+router.get('/recipe/id/:id', function(req, res){
+  CRUD.getRecipe(req, res)
+})
+
+router.get('/recipe/title/:title', function(req, res){
+  CRUD.getRecipe(req, res)
+})
+
 var website = express.Router();
 
 let recipes =[{title: 'Test', picture: {link:'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png', alt:'test'},ingredients: ['ing1','ing2'], method: ['step','step'], index: '0'}]
