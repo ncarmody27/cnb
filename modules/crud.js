@@ -32,6 +32,32 @@ static createRecipe(req, res){
 		res.json(result)
   })
 }
+
+static getAllRecipes(res){
+	let query = `select * from recipes`
+	pool.query(query, (err, result) => {
+		if (err){console.log(err)}
+		//console.log(result.rows[0])
+		res.json(result.rows)
+  })
+}
+
+static getRecipe(req, res){
+	let query = ''
+	if (req.params.id){
+		query = `select * from recipes where index = ${req.params.id}`
+		console.log(`ID QUERY: ${query}`)
+	}
+	if(req.params.title){
+		query = `select * from recipes where title = '${req.params.title}'`
+		console.log(`TITLE QUERY: ${query}`)
+	}
+	pool.query(query, (err, result) => {
+		if (err){console.log(err)}
+		//console.log(result.rows[0])
+		res.json(result.rows)
+  })
+}
 static test(){
 	
 pool.query('SELECT NOW()', (err, res) => {
