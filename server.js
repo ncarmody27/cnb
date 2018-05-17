@@ -8,12 +8,16 @@ var express    = require('express')       // call express
 var app        = express()                // define our app using express
 var bodyParser = require('body-parser')
 var CRUD = require('./modules/crud.js');
-
+var nunjucks = require('nunjucks');
+nunjucks.configure('views', {
+    autoescape: true,
+    express: app
+});
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use(express.static('website'))
+app.use(express.static('static'))
 
 var port = process.env.PORT || 3000        // set our port
 
@@ -29,13 +33,32 @@ router.use(function(req, res, next) {
 });
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function(req, res) {
+/*router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
-});
+});*/
 
+router.get('/', function(req, res) {
+		res.render('api.html',{message: 'to our API!'}); 
+});
 router.get('/query/:query', function(req, res){
 	console.log(req.params.query)
-	CRUD.query(req.params.query)
+  CRUD.query(req.params.query, res)
+})
+
+router.post('/recipe', function(req, res){
+	console.log(req.body)
+	CRUD.createRecipe(req, res)
+})
+
+var website = express.Router();
+
+let recipes =[{title: 'Test', picture: {link:'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png', alt:'test'},ingredients: ['ing1','ing2'], method: ['step','step'], index: '0'}]
+website.get('/recipes', function (req, res){
+	res.render('recipes.html', {recipes})
+})
+
+website.get('/recipes/edit', function (req, res){
+	res.render('recipeCRUD.html', {recipes})
 })
 
 /*
@@ -69,6 +92,7 @@ router.delete('/bears/:_id',function(req, res) {
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router)
+app.use('', website)
 
 // START THE SERVER
 // =============================================================================
