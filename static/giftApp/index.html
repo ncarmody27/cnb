@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Gift App</h1>
+<form id='get'>
+<input type="button" value="GET BEARS" onclick="getAllBears(form);">
+</form>
+
+<form id='getBear'>
+ID: <input type="text" name="id" >
+<input type="button" value="GET BEAR BY ID" onclick="getBear(form);">
+</form>
+
+<form id='postBear'>
+Name: <input type="text" name="name" >
+<input type="button" value="Create BEAR" onclick="postBear(form);">
+</form>
+
+<form id='updateBear'>
+ID: <input type="text" name="id" >
+Name: <input type="text" name="info" >
+<input type="button" value="Update BEAR" onclick="updateBear(form);">
+</form>
+
+<form id='deleteBear'>
+ID: <input type="text" name="id" >
+<input type="button" value="Delete BEAR" onclick="deleteBear(form);">
+</form>
+
+<div id='bears'>
+</div>
+
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="script.js"></script>
+</html>
