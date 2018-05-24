@@ -8,6 +8,7 @@ var express    = require('express')       // call express
 var app        = express()                // define our app using express
 var bodyParser = require('body-parser')
 var CRUD = require('./modules/crud.js');
+const request = require('request');
 var nunjucks = require('nunjucks');
 nunjucks.configure('views', {
     autoescape: true,
@@ -45,11 +46,13 @@ router.get('/query/:query', function(req, res){
   CRUD.query(req.params.query, res)
 })
 
-router.post('/recipe', function(req, res){
+//CREATE
+router.post('/recipe/create', function(req, res){
 	console.log(req.body)
 	CRUD.createRecipe(req, res)
 })
 
+//READ
 router.get('/recipes', function(req, res){
   CRUD.getAllRecipes(res)
 })
@@ -61,17 +64,34 @@ router.get('/recipe/id/:id', function(req, res){
 router.get('/recipe/title/:title', function(req, res){
   CRUD.getRecipe(req, res)
 })
+//UPDATE
+router.post('/recipe', function(req, res){
+	console.log(req.body)
+	CRUD.updateRecipe(req, res)
+})
+
+//DELETE
+router.post('/recipe/delete',function(req, res) {
+	CRUD.deleteRecipe(req,res);
+});
 
 var website = express.Router();
 
-let recipes =[{title: 'Test', picture: {link:'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png', alt:'test'},ingredients: ['ing1','ing2'], method: ['step','step'], index: '0'}]
+//let recipes =[{title: 'Test', picture: {link:'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png', alt:'test'},ingredients: ['ing1','ing2'], method: ['step','step'], index: '0'}]
 website.get('/recipes', function (req, res){
-	res.render('recipes.html', {recipes})
+	request('http://localhost:3000/api/recipes', { json: true }, (err, resp, body) => {
+		if (err) { return console.log(err); }
+		let recipes = (body);
+		res.render('recipes.html', {recipes})
+	})
 })
 
 website.get('/recipes/edit', function (req, res){
-	res.render('recipeCRUD.html', {recipes})
+	res.render('recipeCRUD.html')
 })
+
+
+ 
 
 /*
 // ----------------------------------------------------
