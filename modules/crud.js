@@ -29,7 +29,7 @@ static createRecipe(req, res){
 	pool.query(query, (err, result) => {
 		if (err){console.log(err)}
 		//console.log(result.rows[0])
-		res.json(result)
+		res.render('recipeCRUD.html')
   })
 }
 
@@ -56,6 +56,32 @@ static getRecipe(req, res){
 		if (err){console.log(err)}
 		//console.log(result.rows[0])
 		res.json(result.rows)
+  })
+}
+
+static updateRecipe(req, res){
+	let queryStatement = `update recipes set(title, link, alt, ingredients, method) =` 
+	let queryValues = ` ('${req.body.title}','${req.body.link}','${req.body.alt}',`
+	let queryValues1 =`'{${req.body.ingredients}}','{${req.body.method}}')`
+	let queryValues2 =`where title = '${req.body.title}'`
+	let query = queryStatement + queryValues + queryValues1 + queryValues2
+	//console.log(query)
+	pool.query(query, (err, result) => {
+		if (err){console.log(err)}
+		//console.log(result.rows[0])
+		res.render('recipeCRUD.html')
+  })
+}
+
+static deleteRecipe(req, res){
+	let queryStatement = `delete from recipes ` 
+	let queryValues = `where index = ${req.body.id}`
+	let query = queryStatement + queryValues
+	console.log(query)
+	pool.query(query, (err, result) => {
+		if (err){console.log(err)}
+		//console.log(result.rows[0])
+		res.render('recipeCRUD.html')
   })
 }
 static test(){
