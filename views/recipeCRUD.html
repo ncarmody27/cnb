@@ -2,7 +2,9 @@
 <html>
   <head><title></title></head>
   <body>
-<form id='create' method='post' action='http://localhost:3000/api/recipe'>
+<div>
+<form id='create' method='post' action='http://localhost:3000/api/recipe/create'>
+Create:<br>
 Title: <input type="text" name="title" >
 Picture Link: <input type="text" name="link">
 Picture alt: <input type="text" name="alt" >
@@ -10,6 +12,25 @@ Ingredients: <input type="text" name="ingredients">
 Method: <input type="text" name="method">
 <input type="submit" value="Submit" >
 </form>
+</div>
+<div>
+<form id='update' method='post' action='http://localhost:3000/api/recipe/'>
+Update:<br>
+Title: <input type="text" name="title" >
+Picture Link: <input type="text" name="link">
+Picture alt: <input type="text" name="alt" >
+Ingredients: <input type="text" name="ingredients">
+Method: <input type="text" name="method">
+<input type="submit" value="Submit" >
+</form>
+</div>
+<div>
+<form id='delete' method='post' action='http://localhost:3000/api/recipe/delete'>
+Delete:<br>
+ID: <input type="text" name="id" >
+<input type="submit" value="Submit" >
+</form>
+</div>
   </body>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

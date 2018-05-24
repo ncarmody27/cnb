@@ -6,12 +6,15 @@
 <h3> Welcome {{ message }}</h3>
 
 <h4>API</h4>
-
+<h5>Query</h5>
+<p>HTTP GET /api/query/:query</p>
 <h5>Create</h5>
-<p>HTTP POST /api/user/:userfields</p>
+<p>HTTP POST /api/recipe</p>
 <h5>Read</h5>
-<p>All: HTTP GET /api/users</p>
-<p>By ID: HTTP GET /api/user/:_id</p>
+<p>All: HTTP GET /api/recipes</p>
+<p>By ID: HTTP GET /api/recipe/id/:id</p>
+<p>By Title: HTTP GET /api/recipe/title/:title</p>
+<!--
 <h5>Update</h5>
 <p>HTTP POST /api/user/:_id</p>
 <p>passes req.query as json object into mongoDB update ($set: req.query)</p>
@@ -27,5 +30,6 @@
 <h5>/home</h5>
 <p> HTTP GET /home</p>
 <p>Renders user page from cookie, if no cookie present will redirect to login</p>
+-->
 </body> 
 </html>
