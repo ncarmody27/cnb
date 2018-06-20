@@ -21,7 +21,9 @@ app.use(bodyParser.json())
 app.use(express.static('static'))
 
 var port = process.env.PORT || 3000        // set our port
-
+var prod = 'http://cnb.technology'
+var test = 'http://localhost:3000'
+var current = test
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
@@ -50,6 +52,7 @@ router.get('/query/:query', function(req, res){
 router.post('/recipe/create', function(req, res){
 	console.log(req.body)
 	CRUD.createRecipe(req, res)
+	getRecipesforEdit(req, res);
 })
 
 //READ
@@ -68,14 +71,17 @@ router.get('/recipe/title/:title', function(req, res){
 router.post('/recipe', function(req, res){
 	console.log(req.body)
 	CRUD.updateRecipe(req, res)
+	getRecipesforEdit(req, res);
 })
 
 //DELETE
 router.post('/recipe/delete',function(req, res) {
 	CRUD.deleteRecipe(req,res);
+	getRecipesforEdit(req, res);
 });
 
 var website = express.Router();
+
 
 //let recipes =[{title: 'Test', picture: {link:'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png', alt:'test'},ingredients: ['ing1','ing2'], method: ['step','step'], index: '0'}]
 website.get('/recipes', function (req, res){
@@ -86,8 +92,16 @@ website.get('/recipes', function (req, res){
 	})
 })
 
+function getRecipesforEdit(req, res){
+	request('http://localhost:3000/api/recipes', { json: true }, (err, resp, body) => {
+		if (err) { return console.log(err); }
+		let recipes = (body);
+		res.render('recipeCRUD.html', {url: current, recipes})
+	})
+}
+
 website.get('/recipes/edit', function (req, res){
-	res.render('recipeCRUD.html')
+	getRecipesforEdit(req, res);
 })
 
 
