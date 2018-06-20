@@ -1,9 +1,11 @@
 <!doctype HTML>
 <html>
-  <head><title></title></head>
+  <head><title>Edit Recipes</title></head>
+	<link rel="stylesheet" type="text/css" href="/CRUDstyle.css">
   <body>
+<p></p>
 <div>
-<form id='create' method='post' action='http://cnb.technology/api/recipe/create'>
+<form id='create' method='post' action= {{ url }}/api/recipe/create>
 Create:<br>
 Title: <input type="text" name="title" >
 Picture Link: <input type="text" name="link">
@@ -14,7 +16,7 @@ Method: <input type="text" name="method">
 </form>
 </div>
 <div>
-<form id='update' method='post' action='http://cnb.technology/api/recipe/'>
+<form id='update' method='post' action= {{ url }}/api/recipe/>
 Update:<br>
 Title: <input type="text" name="title" >
 Picture Link: <input type="text" name="link">
@@ -25,12 +27,23 @@ Method: <input type="text" name="method">
 </form>
 </div>
 <div>
-<form id='delete' method='post' action='http://cnb.technology/api/recipe/delete'>
+<form id='delete' method='post' action= {{ url }}/api/recipe/delete>
 Delete:<br>
 ID: <input type="text" name="id" >
 <input type="submit" value="Submit" >
 </form>
 </div>
+{% for recipe in recipes %}
+	<table>
+	<tr><th>Title</th><th>Image link</th><th>Image Alt</th><th>Ingredients</th><th>Method</th><th>Index</th></tr>
+	<tr>
+	<td>{{recipe.title}}</td><td>{{recipe.link}}</td><td>{{recipe.alt}}</td>
+	<td><ul>{% for ingredient in recipe.ingredients %}<li>{{ingredient}}</li>{% endfor %}</ul></td>
+	<td><ol start='0'>{% for step in recipe.method %}<li>{{step}}</li>{% endfor %}</ol></td>
+	<td>{{recipe.index}}</td>
+	</tr>
+	</table>
+	{% endfor %}
   </body>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
