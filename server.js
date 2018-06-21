@@ -41,7 +41,7 @@ router.use(function(req, res, next) {
 });*/
 
 router.get('/', function(req, res) {
-		res.render('api.html',{message: 'to our API!'}); 
+	res.render('api.html',{message: 'to our API!'}); 
 });
 router.get('/query/:query', function(req, res){
 	console.log(req.params.query)
@@ -52,7 +52,7 @@ router.get('/query/:query', function(req, res){
 router.post('/recipe/create', function(req, res){
 	console.log(req.body)
 	CRUD.createRecipe(req, res)
-	getRecipesforEdit(req, res);
+	res.redirect('/recipes/edit')
 })
 
 //READ
@@ -71,13 +71,13 @@ router.get('/recipe/title/:title', function(req, res){
 router.post('/recipe', function(req, res){
 	console.log(req.body)
 	CRUD.updateRecipe(req, res)
-	getRecipesforEdit(req, res);
+	res.redirect('/recipes/edit')
 })
 
 //DELETE
 router.post('/recipe/delete',function(req, res) {
 	CRUD.deleteRecipe(req,res);
-	getRecipesforEdit(req, res);
+	res.redirect('/recipes/edit')
 });
 
 var website = express.Router();
@@ -92,16 +92,13 @@ website.get('/recipes', function (req, res){
 	})
 })
 
-function getRecipesforEdit(req, res){
+
+website.get('/recipes/edit', function (req, res){
 	request('http://localhost:3000/api/recipes', { json: true }, (err, resp, body) => {
 		if (err) { return console.log(err); }
 		let recipes = (body);
 		res.render('recipeCRUD.html', {url: current, recipes})
 	})
-}
-
-website.get('/recipes/edit', function (req, res){
-	getRecipesforEdit(req, res);
 })
 
 
