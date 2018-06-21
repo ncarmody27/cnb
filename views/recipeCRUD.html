@@ -1,9 +1,11 @@
 <!doctype HTML>
 <html>
   <head><title>Edit Recipes</title></head>
-	<link rel="stylesheet" type="text/css" href="/CRUDstyle.css">
+	<link rel="stylesheet" type="text/css" href="/style.css">
   <body>
-<p></p>
+<div>
+<span><a href='/recipes'>Recipes</a><a href='/recipes/edit'>Edit</a></span>
+</div>
 <div>
 <form id='create' method='post' action= {{ url }}/api/recipe/create>
 Create:<br>
@@ -33,6 +35,7 @@ ID: <input type="text" name="id" >
 <input type="submit" value="Submit" >
 </form>
 </div>
+<div id='editTable'>
 {% for recipe in recipes %}
 	<table>
 	<tr><th>Title</th><th>Image link</th><th>Image Alt</th><th>Ingredients</th><th>Method</th><th>Index</th></tr>
@@ -45,6 +48,7 @@ ID: <input type="text" name="id" >
 	</table>
 	{% endfor %}
   </body>
+	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src='/recipes.js'>
