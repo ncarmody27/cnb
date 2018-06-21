@@ -23,7 +23,7 @@ app.use(express.static('static'))
 var port = process.env.PORT || 3000        // set our port
 var prod = 'http://cnb.technology'
 var test = 'http://localhost:3000'
-var current = test
+var current = prod
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
