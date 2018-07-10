@@ -23,7 +23,7 @@ app.use(express.static('static'))
 var port = process.env.PORT || 3000        // set our port
 var prod = 'http://cnb.technology'
 var test = 'http://localhost:3000'
-var current = prod
+var current = test
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
@@ -79,6 +79,11 @@ router.post('/recipe/delete',function(req, res) {
 	CRUD.deleteRecipe(req,res);
 	res.redirect('/recipes/edit')
 });
+//Test
+router.get('/test', function(req, res) {
+	CRUD.test()
+	res.redirect('/recipes')
+})
 
 var website = express.Router();
 
