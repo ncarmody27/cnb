@@ -1,18 +1,3 @@
-function postRecipe(form){
-	let name = form.name.value;
-	console.log(name);
-	$.ajax({
-		type: 'POST',
-		url: uri +'?'+ 'name='+name,
-		success: function(data){
-			console.log(data);
-		},
-		error: function(jqXHR, textStatus, err){
-			console.log(err);
-		}
-	})
-}
-
 function viewRecipe(recipe, divId){
   //takes a recipe(html to be inserted) and the name of the div and inserts it into the DOM
 	const element = document.getElementById(divId+'Recipe')
