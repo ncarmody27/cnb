@@ -26,11 +26,21 @@ static createRecipe(req, res){
 	let queryValues1 =`'{${req.body.ingredients}}','{${req.body.method}}')`
 	let query = queryStatement + queryValues + queryValues1
 	//console.log(query)
-	pool.query(query, (err, result) => {
+	pool.connect((err, client, done) => {
+		if (err) throw err
+		client.query(query, (err, result) => {
+		done ()
+		if (err){console.log(err)}
+		else {console.log(result.rows[0])}    
+		//console.log(result.rows[0])
+		
+		})
+	})
+	/*pool.query(query, (err, result) => {
 		if (err){console.log(err)}
 		//console.log(result.rows[0])
-		res.render('recipeCRUD.html')
-  })
+		
+  })*/
 }
 
 static getAllRecipes(res){
@@ -69,7 +79,7 @@ static updateRecipe(req, res){
 	pool.query(query, (err, result) => {
 		if (err){console.log(err)}
 		//console.log(result.rows[0])
-		res.render('recipeCRUD.html')
+		//res.render('recipeCRUD.html', {current: current})
   })
 }
 
@@ -81,7 +91,7 @@ static deleteRecipe(req, res){
 	pool.query(query, (err, result) => {
 		if (err){console.log(err)}
 		//console.log(result.rows[0])
-		res.render('recipeCRUD.html')
+		//res.render('recipeCRUD.html', {url: current})
   })
 }
 static test(){
