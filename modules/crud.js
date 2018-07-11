@@ -31,16 +31,14 @@ static createRecipe(req, res){
 		client.query(query, (err, result) => {
 		done ()
 		if (err){console.log(err)}
-		else {console.log(result.rows[0])}    
+		else {
+			//console.log(result.rows[0])
+			}    
 		//console.log(result.rows[0])
 		
 		})
 	})
-	/*pool.query(query, (err, result) => {
-		if (err){console.log(err)}
-		//console.log(result.rows[0])
-		
-  })*/
+
 }
 
 static getAllRecipes(res){
@@ -50,9 +48,7 @@ static getAllRecipes(res){
 			client.query(query, (err, result) => {
 			done ()
 			if (err){console.log(err)}
-			else {console.log(result.rows[0])}    
-		//console.log(result.rows[0])
-		
+			else {res.json(result.rows)}    
 		})
 	})
 	/*pool.query(query, (err, result) => {
