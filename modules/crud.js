@@ -45,11 +45,21 @@ static createRecipe(req, res){
 
 static getAllRecipes(res){
 	let query = `select * from recipes`
-	pool.query(query, (err, result) => {
+		pool.connect((err, client, done) => {
+			if (err) throw err
+			client.query(query, (err, result) => {
+			done ()
+			if (err){console.log(err)}
+			else {console.log(result.rows[0])}    
+		//console.log(result.rows[0])
+		
+		})
+	})
+	/*pool.query(query, (err, result) => {
 		if (err){console.log(err)}
 		//console.log(result.rows[0])
 		res.json(result.rows)
-  })
+  })*/
 }
 
 static getRecipe(req, res){
