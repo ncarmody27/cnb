@@ -34,8 +34,6 @@ static createRecipe(req, res){
 		else {
 			//console.log(result.rows[0])
 			}    
-		//console.log(result.rows[0])
-		
 		})
 	})
 
@@ -51,11 +49,6 @@ static getAllRecipes(res){
 			else {res.json(result.rows)}    
 		})
 	})
-	/*pool.query(query, (err, result) => {
-		if (err){console.log(err)}
-		//console.log(result.rows[0])
-		res.json(result.rows)
-  })*/
 }
 
 static getRecipe(req, res){
@@ -68,11 +61,14 @@ static getRecipe(req, res){
 		query = `select * from recipes where title = '${req.params.title}'`
 		console.log(`TITLE QUERY: ${query}`)
 	}
-	pool.query(query, (err, result) => {
-		if (err){console.log(err)}
-		//console.log(result.rows[0])
-		res.json(result.rows)
-  })
+	pool.connect((err, client, done) => {
+			if (err) throw err
+			client.query(query, (err, result) => {
+			done ()
+			if (err){console.log(err)}
+			else {res.json(result.rows)}    
+		})
+	})
 }
 
 static updateRecipe(req, res){
@@ -82,11 +78,14 @@ static updateRecipe(req, res){
 	let queryValues2 =`where title = '${req.body.title}'`
 	let query = queryStatement + queryValues + queryValues1 + queryValues2
 	//console.log(query)
-	pool.query(query, (err, result) => {
-		if (err){console.log(err)}
-		//console.log(result.rows[0])
-		//res.render('recipeCRUD.html', {current: current})
-  })
+	pool.connect((err, client, done) => {
+			if (err) throw err
+			client.query(query, (err, result) => {
+			done ()
+			if (err){console.log(err)}
+			else {}    
+		})
+	})
 }
 
 static deleteRecipe(req, res){
@@ -94,11 +93,14 @@ static deleteRecipe(req, res){
 	let queryValues = `where index = ${req.body.id}`
 	let query = queryStatement + queryValues
 	console.log(query)
-	pool.query(query, (err, result) => {
-		if (err){console.log(err)}
-		//console.log(result.rows[0])
-		//res.render('recipeCRUD.html', {url: current})
-  })
+	pool.connect((err, client, done) => {
+			if (err) throw err
+			client.query(query, (err, result) => {
+			done ()
+			if (err){console.log(err)}
+			else {}    
+		})
+	})
 }
 static test(){
 	
