@@ -8,6 +8,7 @@ var express    = require('express')       // call express
 var app        = express()                // define our app using express
 var bodyParser = require('body-parser')
 var CRUD = require('./modules/crud.js');
+var atomic = require('./modules/atomic.js');
 const request = require('request');
 var nunjucks = require('nunjucks');
 nunjucks.configure('views', {
@@ -86,14 +87,13 @@ router.get('/test', function(req, res) {
 })
 
 var website = express.Router();
-
-
+var navbar = `<div id='stringNavbar'><span><a href='/recipes'>Recipes</a><a href='/recipes/edit'>Edit</a></span></div>`
 //let recipes =[{title: 'Test', picture: {link:'https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png', alt:'test'},ingredients: ['ing1','ing2'], method: ['step','step'], index: '0'}]
 website.get('/recipes', function (req, res){
 	request('http://localhost:3000/api/recipes', { json: true }, (err, resp, body) => {
 		if (err) { return console.log(err); }
 		let recipes = (body);
-		res.render('recipes.html', {recipes})
+		res.render('recipes.html', {recipes, navbar: atomic.navbar})
 	})
 })
 
@@ -102,7 +102,7 @@ website.get('/recipes/edit', function (req, res){
 	request('http://localhost:3000/api/recipes', { json: true }, (err, resp, body) => {
 		if (err) { return console.log(err); }
 		let recipes = (body);
-		res.render('recipeCRUD.html', {url: current, recipes})
+		res.render('recipeCRUD.html', {url: current, recipes, navbar: atomic.navbar})
 	})
 })
 
