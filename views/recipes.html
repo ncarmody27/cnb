@@ -4,9 +4,12 @@
 	<link rel="stylesheet" type="text/css" href="/style.css">
 	</head>
   <body>
-	<div id='nav'>
-	<span><a href='/recipes'>Recipes</a><a href='/recipes/edit'>Edit</a></span>
-	</div>
+<div id ='navbar'>
+<span>
+{% for link in navbar.links %}<a href={{link.link}}>{{link.title}}</a>
+{% endfor %}
+</span>
+</div>
 	<h4>My Recipes Book</h4>
 	
   {% for recipe in recipes %}

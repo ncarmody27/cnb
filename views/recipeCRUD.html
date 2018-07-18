@@ -3,8 +3,11 @@
   <head><title>Edit Recipes</title></head>
 	<link rel="stylesheet" type="text/css" href="/style.css">
   <body>
-<div>
-<span><a href='/recipes'>Recipes</a><a href='/recipes/edit'>Edit</a></span>
+<div id ='navbar'>
+<span>
+{% for link in navbar.links %}<a href={{link.link}}>{{link.title}}</a>
+{% endfor %}
+</span>
 </div>
 <div>
 <form id='create' method='post' action= {{ url }}/api/recipe/create>
