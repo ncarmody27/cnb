@@ -15,6 +15,7 @@ nunjucks.configure('views', {
     autoescape: true,
     express: app
 });
+require('dotenv').config()
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -22,9 +23,8 @@ app.use(bodyParser.json())
 app.use(express.static('static'))
 
 var port = process.env.PORT || 3000        // set our port
-var prod = 'http://cnb.technology'
-var test = 'http://localhost:3000'
-var current = prod
+var current = process.env.URL
+console.log(current)
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
